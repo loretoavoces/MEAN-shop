@@ -28,6 +28,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { EditorModule } from 'primeng/editor';
 import { DropdownModule } from 'primeng/dropdown';
 import { UsersComponent } from './components/users/users.component';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -58,9 +59,10 @@ import { UsersComponent } from './components/users/users.component';
     InputSwitchModule,
     InputTextareaModule,
     EditorModule,
-    DropdownModule
+    DropdownModule,
+    DialogModule
   ],
-  providers: [CategoriesService, MessageService, ConfirmationService, Location],
+  providers: [CategoriesService, MessageService, ConfirmationService, Location, DialogModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

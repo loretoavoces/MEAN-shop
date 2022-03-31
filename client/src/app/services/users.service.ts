@@ -19,4 +19,8 @@ export class UsersService {
     deleteUser(userId: string): Observable<Object> {
         return this.http.delete<Object>(`${this.enviorement}/users/${userId}`)
     }
+
+    editUser(userId: string, data: Users): Observable<Object> {
+        return this.http.put(`${this.enviorement}/users/${userId}`, data)
+    }
 }
