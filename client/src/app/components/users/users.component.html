@@ -1,0 +1,55 @@
+<div class="admin-page">
+  <p-card header="Users" subheader="List of all users">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <button
+            pButton
+            routerLink="/categories/form"
+            class="p-button-success"
+            aria-current="page"
+            icon="pi pi-check"
+            label="New"
+          ></button>
+        </div>
+        <div class="col-12">
+          <table class="w-100">
+            <tr>
+              <th>Name</th>
+              <th>Country</th>
+              <th>Email</th>
+              <th></th>
+            </tr>
+            <tr *ngFor="let user of users">
+              <td>{{ user.name }}</td>
+              <td>{{ user.country }}</td>
+              <td>{{ user.email }}</td>
+
+              <button
+                (click)="deleteUser(user.id)"
+                class="mr-2 p-button-danger"
+                pButton
+                type="button"
+                icon="pi pi-trash"
+                iconPos="left"
+              ></button>
+              <button
+                (click)="editUser(user.id)"
+                class="p-button-success"
+                pButton
+                type="button"
+                icon="pi pi-pencil"
+                iconPos="left"
+              ></button>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </p-card>
+</div>
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+></p-confirmDialog>

@@ -27,6 +27,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { EditorModule } from 'primeng/editor';
 import { DropdownModule } from 'primeng/dropdown';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DropdownModule } from 'primeng/dropdown';
     CategoriesComponent,
     CategoriesFormComponent,
     ProductsListComponent,
-    ProductsFormComponent
+    ProductsFormComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

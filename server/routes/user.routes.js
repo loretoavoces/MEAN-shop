@@ -49,4 +49,18 @@ router.post('/login', async (req, res) => {
     return res.status(200).send(user);
 })
 
+router.delete('/:id', (req, res) => {
+
+    const userId = req.params.id
+    console.log(req.params.id)
+
+    User
+        .findByIdAndDelete(userId)
+        .then(response => {
+            console.log(response)
+           return res.json(response)
+        })
+        .catch(err => res.status(500).json(err))
+})
+
 module.exports = router;
