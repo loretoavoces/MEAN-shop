@@ -21,6 +21,10 @@ export class UsersService {
     }
 
     editUser(userId: string, data: Users): Observable<Object> {
-        return this.http.put(`${this.enviorement}/users/${userId}`, data)
+        return this.http.put<Object>(`${this.enviorement}/users/${userId}`, data)
+    }
+
+    postUser(data: Users): Observable<Users> {
+        return this.http.post<Users>(`${this.enviorement}/users`, data)
     }
 }

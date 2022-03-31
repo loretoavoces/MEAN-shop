@@ -9,4 +9,5 @@ export class Users {
     isAdmin?: string;
     street?: string;
     zip?: string;
+    //passwordHash?: number;
 }

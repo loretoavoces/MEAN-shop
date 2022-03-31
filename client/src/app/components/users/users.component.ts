@@ -25,6 +25,7 @@ export class UsersComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required]],
+      id: ['']
     })
   }
 
@@ -46,22 +47,29 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  editUser(user: string) {
+  async editUser(user: string) {
     this.display = true;
       const data = {
         name: this.usersForm.name.value,
         email: this.usersForm.email.value,
         id: user
       }
-    this.usersService.editUser(user, data).subscribe(res => {
+    await this.usersService.editUser(user, data).toPromise();
       this.display = false;
       this.getUsers();
-    })
   }
 
-  createUser() {
+  async createUser() {
     this.display = true;
     this.editMode = false;
+    const data = {
+      name: this.usersForm.name.value,
+      email: this.usersForm.email.value,
+      id: this.usersForm.id.value
+    }
+    await this.usersService.postUser(data).toPromise();
+    this.display = false;
+    this.getUsers();
   }
 
   get usersForm() {
