@@ -49,6 +49,15 @@ router.post('/login', async (req, res) => {
     return res.status(200).send(user);
 })
 
+
+router.put('/:id', (req, res) => { 
+
+    User
+        .findByIdAndUpdate(req.params.id, req.body, {new: true})
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+})
+
 router.delete('/:id', (req, res) => {
 
     const userId = req.params.id
