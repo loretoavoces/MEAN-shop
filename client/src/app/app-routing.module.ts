@@ -6,6 +6,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProductsFormComponent } from './components/products-form/products-form.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { ShellComponent } from './components/shell/shell.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
@@ -38,6 +39,14 @@ const routes: Routes = [
         {
           path: 'users',
           component: UsersComponent
+        },
+        {
+          path: 'users/form',
+          component: UserFormComponent
+        },
+        {
+          path: 'users/form/:id',
+          component: UserFormComponent
       }
     ]
   }

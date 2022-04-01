@@ -3,7 +3,7 @@ import { Users } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationService } from 'primeng/api';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -13,20 +13,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class UsersComponent implements OnInit {
 
   users: Users[];
-  display: boolean = false;
-  editMode: boolean;
-  form: FormGroup;
-  isSubmitted: boolean = false;
 
-  constructor(private usersService: UsersService, private formBuilder: FormBuilder, private dialogModule: DialogModule, private confirmationService: ConfirmationService) { }
+  constructor(private router: Router, private usersService: UsersService, private dialogModule: DialogModule, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.getUsers();
-    this.form = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      id: ['']
-    })
   }
 
   getUsers() {
@@ -47,33 +38,9 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  async editUser(user: string) {
-    this.display = true;
-      const data = {
-        name: this.usersForm.name.value,
-        email: this.usersForm.email.value,
-        id: user
-      }
-    await this.usersService.editUser(user, data).toPromise();
-      this.display = false;
-      this.getUsers();
+  editUser(user: string) {
+    this.router.navigateByUrl(`users/form/${user}`)
   }
 
-  async createUser() {
-    this.display = true;
-    this.editMode = false;
-    const data = {
-      name: this.usersForm.name.value,
-      email: this.usersForm.email.value,
-      id: this.usersForm.id.value
-    }
-    await this.usersService.postUser(data).toPromise();
-    this.display = false;
-    this.getUsers();
-  }
-
-  get usersForm() {
-    return this.form.controls;
-  }
 }
 
