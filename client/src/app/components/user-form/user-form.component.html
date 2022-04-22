@@ -43,10 +43,20 @@
             <input formControlName="email" id="email" type="text" pInputText />
           </div>
         </div>
-        <div *ngIf="!editMode" class="p-fluid col-4">
+        <div class="p-fluid col-4">
           <div class="p-field">
-            <label for="email">Id</label>
-            <input formControlName="id" id="id" type="text" pInputText />
+            <label for="country">Country</label>
+            <p-dropdown
+              [options]="countries"
+              formControlName="country"
+              optionLabel="name"
+              optionValue="id"
+              id="country"
+              [filter]="true"
+              filterBy="name"
+              [showClear]="true"
+              placeholder="Select a Country"
+            ></p-dropdown>
           </div>
         </div>
       </div>

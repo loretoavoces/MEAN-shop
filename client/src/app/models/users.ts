@@ -5,7 +5,7 @@ export class Users {
     id: string;
     apartment?: string;
     city?: string;
-    country?: string;
+    country: string;
     isAdmin?: string;
     street?: string;
     zip?: string;
