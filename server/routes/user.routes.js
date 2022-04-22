@@ -34,19 +34,29 @@ router.post('/', async (req, res) => {
     res.send(user);
 })
 
-router.post('/login', async (req, res) => {
-    const user = await User.findOne({ email: req.body.email });
+router.post('/login', async (req,res) => {
+    const user = await User.findOne({email: req.body.email})
     const secret = process.env.secret;
-    if (!user) return res.status(500).send('The user not found');
-    if (user && bcrypt.compareSync(req.body.passwordHash, user.passwordHash)) {
-        const token = jwt.sign({
-            userId: user.id
-        }, secret)
-        res.status(200).send({user: user.email, token})
-    } else {
-        res.status(400).send('password is wrong')
+    if(!user) {
+        return res.status(400).send('The user not found');
     }
-    return res.status(200).send(user);
+
+    if(user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
+        const token = jwt.sign(
+            {
+                userId: user.id,
+                isAdmin: user.isAdmin
+            },
+            secret,
+            {expiresIn : '1d'}
+        )
+       
+        res.status(200).send({user: user.email , token: token}) 
+    } else {
+       res.status(400).send('password is wrong!');
+    }
+
+    
 })
 
 
