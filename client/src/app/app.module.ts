@@ -30,6 +30,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { UsersComponent } from './components/users/users.component';
 import { DialogModule } from 'primeng/dialog';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { LoginComponent } from './components/login/login.component';
+import { UsersModule } from './users.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { UserFormComponent } from './components/user-form/user-form.component';
     ProductsListComponent,
     ProductsFormComponent,
     UsersComponent,
-    UserFormComponent
+    UserFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ import { UserFormComponent } from './components/user-form/user-form.component';
     InputTextareaModule,
     EditorModule,
     DropdownModule,
-    DialogModule
+    DialogModule,
+    UsersModule
   ],
   providers: [CategoriesService, MessageService, ConfirmationService, Location, DialogModule],
   bootstrap: [AppComponent]
