@@ -8,10 +8,11 @@ import { ProductsListComponent } from './components/products-list/products-list.
 import { ShellComponent } from './components/shell/shell.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UsersComponent } from './components/users/users.component';
+import { AuthGardService } from './services/auth-gard.service';
 
 const routes: Routes = [
     {
-    path: '', component: ShellComponent, children: [
+    path: '', component: ShellComponent, canActivate: [AuthGardService], children: [
       {
         path: 'dashboard', component: DashboardComponent
         },
