@@ -9,6 +9,7 @@ Control panel of a store, controlling if you are an administrator, you can acces
 ## Technologies used 
 - JS
 - Angular
+- Typescript
 - Node.js
 - Express.js
 - Mongoose
