@@ -14,7 +14,7 @@ const routes: Routes = [
     {
     path: '', component: ShellComponent, canActivate: [AuthGardService], children: [
       {
-        path: 'dashboard', component: DashboardComponent
+        path: '', component: DashboardComponent
         },
         {
         path: 'categories', component: CategoriesComponent

@@ -8,6 +8,7 @@
               <i class="pi pi-align-justify"></i><br />
               <span class="name">Categories</span>
             </div>
+            <span class="number">{{ categories?.length }}</span>
           </div>
         </p-card>
       </div>
@@ -18,20 +19,22 @@
               <i class="pi pi-briefcase"></i><br />
               <span class="name">Products</span>
             </div>
+            <span class="number">{{ products?.length }}</span>
           </div>
         </p-card>
       </div>
-      <div class="col-3">
+      <div class="col-3 pointer" routerLink="/users">
         <p-card styleClass="d-users">
           <div class="d-item">
             <div>
               <i class="pi pi-users"></i><br />
               <span class="name">Users</span>
             </div>
+            <span class="number">{{ users?.length }}</span>
           </div>
         </p-card>
       </div>
-      <div class="col-3">
+      <!-- <div class="col-3">
         <p-card styleClass="d-totalsales">
           <div class="d-item">
             <div>
@@ -40,7 +43,7 @@
             </div>
           </div>
         </p-card>
-      </div>
+      </div> -->
     </div>
   </p-card>
 </div>
