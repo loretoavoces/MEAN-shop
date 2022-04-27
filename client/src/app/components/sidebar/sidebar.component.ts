@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LocalstorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private localStorage: LocalstorageService, private router: Router) { }
 
   ngOnInit(): void {
+    
+  }
+
+  logout() {
+    this.localStorage.removeToken();
+    this.router.navigate(['/login'])
   }
 
 }
