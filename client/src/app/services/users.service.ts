@@ -27,4 +27,16 @@ export class UsersService {
     postUser(data: Users): Observable<Users> {
         return this.http.post<Users>(`${this.enviorement}/users`, data)
     }
+
+    getUser(userId: string): Observable<Users> {
+        return this.http.get<Users>(`${this.enviorement}/users/${userId}`)
+    }
+
+    login(data: Users): Observable<Users> {
+        return this.http.post<Users>(`${this.enviorement}/users/login`, data)
+    }
+    
+    signup(data: Users): Observable<Users> {
+        return this.http.post<Users>(`${this.enviorement}/users/signup`, data)
+    }
 }

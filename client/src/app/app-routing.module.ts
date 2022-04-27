@@ -6,11 +6,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProductsFormComponent } from './components/products-form/products-form.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { ShellComponent } from './components/shell/shell.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 import { UsersComponent } from './components/users/users.component';
+import { AuthGardService } from './services/auth-gard.service';
 
 const routes: Routes = [
     {
-    path: '', component: ShellComponent, children: [
+    path: '', component: ShellComponent, canActivate: [AuthGardService], children: [
       {
         path: 'dashboard', component: DashboardComponent
         },
@@ -38,6 +40,14 @@ const routes: Routes = [
         {
           path: 'users',
           component: UsersComponent
+        },
+        {
+          path: 'users/form',
+          component: UserFormComponent
+        },
+        {
+          path: 'users/form/:id',
+          component: UserFormComponent
       }
     ]
   }
