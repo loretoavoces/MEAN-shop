@@ -21,7 +21,7 @@ export class CategoriesFormComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
-      icon: ['', [Validators.required]],
+      type: ['', [Validators.required]],
     })
     this.checkEditMode();
   }
@@ -31,7 +31,7 @@ export class CategoriesFormComponent implements OnInit {
     if (this.form.invalid) return this.messageService.add({severity:'error', summary:'Error', detail:'Category is not created'});
     const data = {
       name: this.categoryForm.name.value,
-      icon: this.categoryForm.icon.value,
+      type: this.categoryForm.type.value,
     }
     if (this.editMode) {
       this.route.params.subscribe(params => {
@@ -56,7 +56,7 @@ export class CategoriesFormComponent implements OnInit {
         this.editMode = true
         this.categoriesService.getCategory(params.id).subscribe(res => {
           this.categoryForm.name.setValue(res.name)
-          this.categoryForm.icon.setValue(res.icon)
+          this.categoryForm.type.setValue(res.type)
         });
       };
     })

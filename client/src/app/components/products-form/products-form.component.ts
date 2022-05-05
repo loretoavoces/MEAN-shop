@@ -53,7 +53,6 @@ export class ProductsFormComponent implements OnInit {
 
   onImageUpload(event: any) {
     const uploadData = event.target.files[0]
-    console.log(uploadData)
     if (uploadData) {
       this.form.patchValue({ image: uploadData })
       this.form.get('image')?.updateValueAndValidity();
@@ -67,15 +66,13 @@ export class ProductsFormComponent implements OnInit {
 
   onSubmit() {
     this.isSubmitted = true;
-    // if (this.form.invalid) return this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Product is not created' });
+    if (this.form.invalid) return this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Product is not created' });
     const productFormData = new FormData();
-    console.log(productFormData)
     Object.keys(this.productForm).map((key) => {
       productFormData.append(key, this.productForm[key].value);  
     });
     if (this.editMode) {
       this.route.params.subscribe(params => {
-        console.log(productFormData)
         this.productsService.updateProduct(params.id, productFormData).subscribe();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Category changed' });
         this.location.back();
@@ -93,7 +90,7 @@ export class ProductsFormComponent implements OnInit {
       if (params.id) {
         this.editMode = true;
         this.currentProductId = params.id;
-        this.productsService.getProduct(params.id).subscribe((product) => { // gteRawValue()
+        this.productsService.getProduct(params.id).subscribe((product) => {
           this.productForm.name.setValue(product.name);
           this.productForm.category.setValue(product.category?.id);
           this.productForm.brand.setValue(product.brand);

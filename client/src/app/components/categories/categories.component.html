@@ -18,7 +18,7 @@
               <tr>
                 <th>Reference</th>
                 <th>Name</th>
-                <th>Icon name</th>
+                <th>Type</th>
                 <th></th>
               </tr>
             </ng-template>
@@ -26,7 +26,7 @@
               <tr>
                 <td>{{ category._id }}</td>
                 <td>{{ category.name }}</td>
-                <td>{{ category.icon }}</td>
+                <td>{{ category.type }}</td>
                 <td>
                   <button
                     (click)="deleteCategory(category._id)"
