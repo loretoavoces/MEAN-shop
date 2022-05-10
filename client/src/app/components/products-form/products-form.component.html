@@ -110,6 +110,17 @@
             <p-inputSwitch formControlName="isFeatured"></p-inputSwitch>
           </div>
         </div>
+        <div class="p-fluid col-4">
+          <div class="p-field">
+            <label for="dateCreated">Created at</label><br />
+            <input
+              formControlName="dateCreated"
+              id="dateCreated"
+              type="date"
+              pInputText
+            />
+          </div>
+        </div>
       </div>
       <div class="row">
         <div class="p-fluid col-12">
@@ -138,7 +149,7 @@
           ></p-editor>
         </div>
       </div>
-      <!-- <div class="p-field p-col-12">
+      <div class="p-field p-col-12">
         <label for="name">Main Image</label>
         <input
           type="file"
@@ -152,7 +163,7 @@
         <div class="p-col-2 p-mt-2 p-pl-0">
           <img style="width: 100%" [src]="imageDisplay" alt="" />
         </div>
-      </div> -->
+      </div>
     </form>
   </p-card>
 </div>
