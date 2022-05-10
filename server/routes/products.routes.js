@@ -79,7 +79,6 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) => {
         dateCreated: req.body.dateCreated,
         brand: req.body.brand
     });
-    console.log(product);
     product = await product.save();
 
     if (!product) return res.status(500).send('The product cannot be created');

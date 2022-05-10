@@ -8,7 +8,6 @@ const bcrypt = require("bcrypt")
 
 router.get('/', async (req, res) =>{
     const userList = await User.find().select('-password')
-    console.log(userList);
     if (!userList) return res.status(500).json({ success: false });
     res.send(userList);
 })
