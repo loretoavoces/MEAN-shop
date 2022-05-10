@@ -11,9 +11,18 @@ const userSchema = new Schema({
     apartment: { type: String, default: '' },
     zip :{ type: String, default: '' },
     city: { type: String, default: '' },
-    username: { type: String, unique: true, required: true},
+    username: { type: String, unique: true },
     country: { type: String, default: '' }
 });
+
+userSchema.virtual('id').get(function () {
+    return this._id.toHexString();
+});
+
+userSchema.set('toJSON', {
+    virtuals: true,
+});
+
 
 const User = mongoose.model('User', userSchema);
 module.exports = User

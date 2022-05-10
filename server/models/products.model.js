@@ -13,7 +13,8 @@ const productSchema = new Schema({
     rating: { type: Number, default: 0 },
     numReviews: { tye: Number, default: 0 },
     isFeatured: { type: Boolean, default: false },
-    dateCreated: { type: Date, default: Date.now }
+    dateCreated: { type: Date, default: Date.now },
+    brand: { type: String, required: true }
 })
 
 const Product = mongoose.model("Product", productSchema);

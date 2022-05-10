@@ -24,17 +24,12 @@ export class ProductsService {
     return this.http.delete<Object>(`${this.enviorement}/products/${productId}`)
   }
     
-  updateProduct(productId: string, data: FormData): Observable<Product>{
+  updateProduct(productId: string, data: any): Observable<Product>{
     return this.http.put<Product>(`${this.enviorement}/products/${productId}`, data)
   }
 
-  postCategories(product: FormData): Observable<Product>{
+  postCategories(product: any): Observable<Product>{
     return this.http.post<Product>(`${this.enviorement}/products`, product)
-  }
-
-
-  uploadImages(image: any): Observable<any> {
-    return this.http.post<any>(`${this.enviorement}/upload`, image)
   }
 
 }

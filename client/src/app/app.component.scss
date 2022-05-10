@@ -54,6 +54,7 @@
 
                         &.logout {
                             color: var(--blue-500);
+                            cursor: pointer;
                         }
                     }
                 }
@@ -83,7 +84,7 @@
   }
 
   .number {
-    margin-top: 50px;
+    margin-top: 60px;
     font-size: 2.5em;
   }
 }

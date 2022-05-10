@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt")
 
 router.get('/', async (req, res) =>{
     const userList = await User.find().select('-password')
+    console.log(userList);
     if (!userList) return res.status(500).json({ success: false });
     res.send(userList);
 })
@@ -22,7 +23,7 @@ router.post('/', async (req, res) => {
     let user = new User({
         name: req.body.name,
         email: req.body.email,
-        password: await bcrypt.hashSync(req.body.password, 10),
+        //password: await bcrypt.hashSync(req.body.password, 10),
         phone: req.body.phone,
         isAdmin: req.body.isAdmin,
         street: req.body.street,
@@ -30,8 +31,10 @@ router.post('/', async (req, res) => {
         zip: req.body.zip,
         city: req.body.city,
         country: req.body.country,
+        username: req.body.username
     });
     user = await user.save();
+
     if (!user) return res.status(404).send('the category cannot be created');
     res.send(user);
 })
@@ -71,7 +74,7 @@ router.post('/signup', (req, res) => {
 
 //Login
 router.post('/login', async (req,res) => {
-    const user = await User.findOne({email: req.body.email})
+    const user = await User.findOne({ email: req.body.email })
     const secret = process.env.secret;
     if(!user) {
         return res.status(400).send('The user not found');

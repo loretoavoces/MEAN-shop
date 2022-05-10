@@ -23,20 +23,38 @@
           placeholder="Password"
           formControlName="password"
         />
+        <small
+          *ngIf="loginForm.controls.password.invalid && isSubmitted"
+          class="p-error"
+        >
+          Password is required</small
+        >
         <input
           type="name"
           class="block border border-grey-light w-full p-3 rounded mb-4"
           name="name"
-          placeholder="name"
+          placeholder="Name"
           formControlName="name"
         />
+        <small
+          *ngIf="loginForm.controls.name.invalid && isSubmitted"
+          class="p-error"
+        >
+          Name is required</small
+        >
         <input
           type="username"
           class="block border border-grey-light w-full p-3 rounded mb-4"
           name="username"
-          placeholder="username"
+          placeholder="Username"
           formControlName="username"
         />
+        <small
+          *ngIf="loginForm.controls.username.invalid && isSubmitted"
+          class="p-error"
+        >
+          Username is required</small
+        >
       </form>
       <button
         type="submit"

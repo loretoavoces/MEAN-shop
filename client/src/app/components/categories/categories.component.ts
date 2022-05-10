@@ -11,15 +11,15 @@ import { CategoriesService } from 'src/app/services/categories.service';
 })
 export class CategoriesComponent implements OnInit {
 
-  categories: Category[] = [];
+  categories: Category[];
 
   constructor(private router: Router, private confirmationService: ConfirmationService, private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
-    this.getCategoies();
+    this.getCategories();
   }
 
-  getCategoies() {
+  getCategories() {
     this.categoriesService.getCategories().subscribe(res => this.categories = res)
   }
 
@@ -30,7 +30,7 @@ export class CategoriesComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.categoriesService.removeCategory(category).subscribe(res => {
-          this.getCategoies();
+          this.getCategories();
         });
       },
       reject: () => { }

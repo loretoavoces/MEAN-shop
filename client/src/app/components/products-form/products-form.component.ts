@@ -14,12 +14,14 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductsFormComponent implements OnInit {
   
-    form!: FormGroup;
-    isSubmitted: boolean = false;
-    editMode = false;
-    catagories: Category[] = [];
-    imageDisplay: any;
-    currentProductId!: string;
+  form!: FormGroup;
+  isSubmitted: boolean = false;
+  editMode = false;
+  catagories: Category[] = [];
+  imageDisplay: any;
+  currentProductId!: string;
+  file: File;
+  shortLink: string = "";
 
   constructor(private productsService: ProductsService, private location: Location, private route: ActivatedRoute, private formBuilder: FormBuilder, private categoriesService: CategoriesService,  private messageService: MessageService) {}
 
@@ -38,8 +40,13 @@ export class ProductsFormComponent implements OnInit {
       countInStock: ['', Validators.required],
       description: ['', Validators.required],
       richDescription: [''],
-      //image: [''],
-      isFeatured: [false]
+      isFeatured: [false],
+      rating: [''],
+      numReviews: [''],
+      dateCreated: [''],
+      id: [''],
+      image: [''],
+      images: [''],
     });
   }
 
@@ -52,36 +59,40 @@ export class ProductsFormComponent implements OnInit {
   }
 
   onImageUpload(event: any) {
-    const uploadData = event.target.files[0]
-    console.log(uploadData)
-    if (uploadData) {
-      this.form.patchValue({ image: uploadData })
-      this.form.get('image')?.updateValueAndValidity();
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        this.imageDisplay = fileReader.result
-      }
-      fileReader.readAsDataURL(uploadData);
+    if (event.target.files.length > 0) {
+      this.file = event.target.files[0];
+      this.form.patchValue({
+        image: this.file
+      });
     }
   }
 
   onSubmit() {
     this.isSubmitted = true;
-    // if (this.form.invalid) return this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Product is not created' });
-    const productFormData = new FormData();
-    console.log(productFormData)
-    Object.keys(this.productForm).map((key) => {
-      productFormData.append(key, this.productForm[key].value);  
-    });
+    if (this.form.invalid) return this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Product is not created' });
+    const data = {
+      name: this.productForm.name.value,
+      brand: this.productForm.brand.value,
+      price: this.productForm.price.value,
+      category: this.productForm.category.value,
+      countInStock: this.productForm.countInStock.value,
+      description: this.productForm.description.value,
+      richDescription: this.productForm.richDescription.value,
+      isFeatured: this.productForm.isFeatured.value,
+      rating: this.productForm.rating.value,
+      numReviews: this.productForm.numReviews.value,
+      dateCreated: this.productForm.dateCreated.value,
+      image: this.productForm.image.value,
+      images: this.productForm.images.value,
+    }
     if (this.editMode) {
       this.route.params.subscribe(params => {
-        console.log(productFormData)
-        this.productsService.updateProduct(params.id, productFormData).subscribe();
+        this.productsService.updateProduct(params.id, data).subscribe();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Category changed' });
         this.location.back();
       });
     } else {
-      this.productsService.postCategories(productFormData).toPromise();
+      this.productsService.postCategories(data).toPromise();
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Category created' });
       this.location.back();
     }
@@ -93,7 +104,7 @@ export class ProductsFormComponent implements OnInit {
       if (params.id) {
         this.editMode = true;
         this.currentProductId = params.id;
-        this.productsService.getProduct(params.id).subscribe((product) => { // gteRawValue()
+        this.productsService.getProduct(params.id).subscribe((product) => {
           this.productForm.name.setValue(product.name);
           this.productForm.category.setValue(product.category?.id);
           this.productForm.brand.setValue(product.brand);
